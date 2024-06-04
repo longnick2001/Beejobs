@@ -14,26 +14,26 @@ export default function LoginScreen() {
     const router = useRouter();
 
     const handleLogin = async () => {
-        router.navigate('/home');
+        // router.navigate('/home');
 
-        // if (username.trim() === '' || passwd.trim() === '') {
-        //     setShowMissingInfoAlert(true);
-        //     return;
-        // }
+        if (username.trim() === '' || passwd.trim() === '') {
+            setShowMissingInfoAlert(true);
+            return;
+        }
 
-        // try {
-        //     console.log('Đăng nhập...',{username, passwd})
-        //     let response: AxiosResponse = await axios.post('http://beejobs.io.vn:14307/api/login', {
-        //         username,
-        //         passwd,
-        //     });;
+        try {
+            // console.log('Đăng nhập...',{username, passwd})
+            let response: AxiosResponse = await axios.post('http://beejobs.io.vn:14307/api/login', {
+                username,
+                passwd,
+            });;
 
-        //     console.log('Đăng nhập thành công:', response.data);
-        //     // Chuyển hướng đến màn hình khác sau khi đăng nhập thành công
-        //     router.navigate('/home');
-        // } catch (error) {
-        //     console.error('Lỗi đăng nhập:', error);
-        // }
+            console.log('Đăng nhập thành công:', response.data);
+            // Chuyển hướng đến màn hình khác sau khi đăng nhập thành công
+            router.navigate('/home');
+        } catch (error) {
+            console.error('Lỗi đăng nhập:', error);
+        }
     };
 
 

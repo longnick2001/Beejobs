@@ -4,13 +4,13 @@ import { Tabs } from "expo-router"
 export default () => {
     return (
         <Tabs>
-            <Tabs.Screen name='home' options={{
+            <Tabs.Screen name='home' options={{ title:'Trang chủ',
                 headerShown: false,
                 tabBarIcon: ({ color, focused }) => (
                     <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
                 )
             }} />
-            <Tabs.Screen name='Network' options={{
+            <Tabs.Screen name='CV' options={{title:'Hồ sơ',
                 headerShown: false,
                 tabBarIcon: ({ color, focused }) => (
                     <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
