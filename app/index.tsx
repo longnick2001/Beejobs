@@ -3,7 +3,7 @@ import { StyleSheet, View, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 import { ThemedText } from '@/components/ThemedText';
 
-const SplashScreen = () => {
+const index = () => {
   const router = useRouter();
 
   const handleClick = () => {
@@ -24,7 +24,7 @@ const SplashScreen = () => {
   );
 };
 
-export default SplashScreen;
+export default index;
 
 const styles = StyleSheet.create({
   container: {
