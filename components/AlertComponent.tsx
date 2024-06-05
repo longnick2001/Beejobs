@@ -6,11 +6,12 @@ import { ThemedText } from '@/components/ThemedText';
 interface AlertComponentProps {
   message: string;
   visible: boolean;
-  duration?: number; // Thời gian hiển thị cảnh báo (mặc định là 3 giây)
+  duration?: number;
+  color?:string; // Thời gian hiển thị cảnh báo (mặc định là 3 giây)
   onClose?: () => void; // Hàm được gọi khi cảnh báo được đóng
 }
 
-const AlertComponent = ({ message, visible, duration = 1500, onClose }: AlertComponentProps) => {
+const AlertComponent = ({ message, visible, color, duration = 1500, onClose }: AlertComponentProps) => {
 
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const AlertComponent = ({ message, visible, duration = 1500, onClose }: AlertCom
 
   return (
     <View style={styles.alertContainer}>
-      <ThemedView style={styles.alertBox}>
+      <ThemedView style={[styles.alertBox, {backgroundColor: color}]}>
         <ThemedText style={styles.alertMessage}>{message}</ThemedText>
       </ThemedView>
     </View>
@@ -45,7 +46,7 @@ const AlertComponent = ({ message, visible, duration = 1500, onClose }: AlertCom
 const styles = StyleSheet.create({
   alertContainer: {
     position: 'absolute',
-    top: 0,
+    top: 20,
     left: 0,
     right: 0,
     zIndex: 1,

@@ -105,11 +105,11 @@ const RegisterScreen = () => {
                 </TouchableOpacity>
 
                 <AlertComponent
+                    color='#FF4F4F'
                     message="Bạn nhập thiếu thông tin!"
                     visible={showMissingInfoAlert}
                     onClose={() => setShowMissingInfoAlert(false)}
                 />
-
 
             </ThemedView>
         </ScrollView>

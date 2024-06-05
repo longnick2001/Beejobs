@@ -7,10 +7,16 @@ import axios, { AxiosResponse } from 'axios';
 import AlertComponent from '@/components/AlertComponent';
 import { Redirect, useRouter } from 'expo-router';
 
+function delay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export default function LoginScreen() {
     const [username, setAcount] = useState('');
     const [passwd, setPassword] = useState('');
     const [showMissingInfoAlert, setShowMissingInfoAlert] = useState(false);
+    const [loginStatus, setLoginFailed] = useState(false);
+    const [success, setSuccess] = useState(false);
     const router = useRouter();
 
     const handleLogin = async () => {
@@ -29,7 +35,15 @@ export default function LoginScreen() {
             });;
 
             console.log('Đăng nhập thành công:', response.data);
+            if (response.data.status === 400) {
+                console.log('Đăng nhập thất bại');
+                setLoginFailed(true);
+                return
+            } else {
+                setSuccess(true);
+            }
             // Chuyển hướng đến màn hình khác sau khi đăng nhập thành công
+            await delay(1500);
             router.navigate('/home');
         } catch (error) {
             console.error('Lỗi đăng nhập:', error);
@@ -50,7 +64,7 @@ export default function LoginScreen() {
                     <TextInput
                         style={[styles.input, { paddingLeft: 12 }]}
                         placeholder="Enter your username"
-                        value={username }
+                        value={username}
                         onChangeText={setAcount}
                         keyboardType="default"
                     />
@@ -85,7 +99,20 @@ export default function LoginScreen() {
             <AlertComponent
                 message="Bạn nhập thiếu thông tin!"
                 visible={showMissingInfoAlert}
+                color='#FF4F4F'
                 onClose={() => setShowMissingInfoAlert(false)}
+            />
+            <AlertComponent
+                message="Đăng nhập thành công!"
+                visible={success}
+                color='green'
+                onClose={() => setSuccess(false)}
+            />
+            <AlertComponent
+                message="Đăng nhập thất bại!"
+                visible={loginStatus}
+                color='#FF4F4F'
+                onClose={() => setLoginFailed(false)}
             />
         </ThemedView>
     );
